@@ -1,0 +1,38 @@
+DEFINE QLOCAL(CONIX.LOCAL.QUEUE) REPLACE  +
+       DESCR(' ') +
+       PUT(ENABLED) +
+       DEFPRTY(0) +
+       DEFPSIST(NO) +
+       GET(ENABLED) +
+       MAXDEPTH(5000) +
+       MAXMSGL(1024) +
+       DEFSOPT(SHARED) +
+       NOHARDENBO +
+       USAGE(NORMAL) +
+       NOTRIGGER;
+
+DEFINE QLOCAL(CONIX.PRODUCE.QUEUE) REPLACE  +
+       DESCR(' ') +
+       PUT(ENABLED) +
+       DEFPRTY(0) +
+       DEFPSIST(NO) +
+       GET(ENABLED) +
+       MAXDEPTH(5000) +
+       MAXMSGL(1024) +
+       DEFSOPT(SHARED) +
+       NOHARDENBO +
+       USAGE(NORMAL) +
+       NOTRIGGER;
+
+DEFINE QLOCAL(CONIX.CONSUME.QUEUE) REPLACE  +
+       DESCR(' ') +
+       PUT(ENABLED) +
+       DEFPRTY(0) +
+       DEFPSIST(NO) +
+       GET(ENABLED) +
+       MAXDEPTH(5000) +
+       MAXMSGL(1024) +
+       DEFSOPT(SHARED) +
+       NOHARDENBO +
+       USAGE(NORMAL) +
+       NOTRIGGER;

@@ -1,0 +1,10 @@
+# ignore .git
+.gitignore
+# ignore all log-files
+**/*.log
+# ignore special files from git
+./Dockerfile
+./.dockerignore
+# ignore bin and pkg folder
+./bin
+./pkg

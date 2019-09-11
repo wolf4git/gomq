@@ -1,0 +1,6 @@
+DOCKER_VOL:/home/docker-volume/conix
+DOCKER_NET:conixnet
+DOCKER_IMG:conix-gomq
+DOCKER_UUID:1000
+DOCKER_UGID:1000
+DOCKER_UNAME:wolf

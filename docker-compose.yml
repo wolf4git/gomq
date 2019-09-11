@@ -1,0 +1,71 @@
+version: '3.1'
+
+networks:
+  net:
+
+services:
+  # ---------------------------------------------------------------------------
+  prt:
+    # container_name: mqp
+    image: portainer/portainer
+    #..see https://hub.docker.com/r/portainer/portainer/
+    # command: --templates http://templates/templates.json
+    networks:
+      - net
+    ports:
+      - "${PORTAINER_PORT_PUB}:${PORTAINER_PORT_LOC}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/docker-volume/${PROJ_VERTICAL}/_stacks/_portainer/data:/data
+  # ---------------------------------------------------------------------------
+  mqs:
+    # container_name: mqs
+  # image: ibmcom/mq:${VERSION_MQ}-amd64
+    image: ${PROJ_VERTICAL}-${PROJ_SERVICE}-mqs:${PROJ_VERSION}
+    #..see https://hub.docker.com/r/ibmcom/mq/
+    build:
+      context: ./mqs
+      args:
+        _VERSION_MQ: ${VERSION_MQ}
+        _PROJ_VERTICAL: ${PROJ_VERTICAL}
+        _CONIX_USER_PWD: xinoc
+    environment:
+      LICENSE: accept
+      MQ_QMGR_NAME: ${CONIXMQM_MQMGR}
+      MQ_APP_PASSWORD: ${CONIXMQM_APPWD}
+      MQ_ADMIN_PASSWORD: ${CONIXMQM_ADPWD}
+      CONIXMQM_MQMGR: ${CONIXMQM_MQMGR}
+    # CONIXMQM_APPWD: ${CONIXMQM_APPWD}
+      CONIXMQM_ADPWD: ${CONIXMQM_ADPWD}
+    networks:
+      - net
+    ports:
+      - "${MQ_STD_PORT_PUB}:${MQ_STD_PORT_LOC}"
+      - "${MQ_SSL_PORT_PUB}:${MQ_SSL_PORT_LOC}"
+  # volumes:
+  #   - /home/docker-volume/${PROJ_VERTICAL}/_stacks/_mqs/data:/mnt/mqm 
+  # ---------------------------------------------------------------------------
+  # gobuild:
+  #   image: golang:${VERSION_GO}-${VERSION_ALPINE}
+  #   #..see https://hub.docker.com/_/golang
+  #   networks:
+  #     - _net
+  #   environment:
+  #     MQ_STD_PORT_PUB: ${MQ_STD_PORT_PUB}
+  #     MQ_SSL_PORT_PUB: ${MQ_SSL_PORT_PUB}
+  #   networks:
+  #     - _net
+  # ---------------------------------------------------------------------------
+  mqc:
+    # container_name: mqc
+    image: ${PROJ_VERTICAL}-${PROJ_SERVICE}-mqc:${PROJ_VERSION}
+    build:
+      context: ./gopath
+      args:
+        _PROJ_VERTICAL: ${PROJ_VERTICAL}
+    environment:
+      MQ_STD_PORT_PUB: ${MQ_STD_PORT_PUB}
+      MQ_SSL_PORT_PUB: ${MQ_SSL_PORT_PUB}
+      CONIXMQM_MQMGR: ${CONIXMQM_MQMGR}
+    networks:
+      - net

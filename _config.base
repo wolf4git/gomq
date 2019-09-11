@@ -1,0 +1,74 @@
+# ---------------------------------------------------------------------------------------
+# 
+PROJ_SOURCE_PATH:${PWD%/*}
+GOPATH:${PWD}/gopath
+# ---------------------------------------------------------------------------------------
+# all the following settings will be replaceed via "sed" command in script setup.sh
+#
+# Additionally, we use "#" as seperator in sed-command used in setup.sh
+#   in other words: DO NOT USE "#" within your KEY, or VALUE deinition
+#   Exception
+#     PROJ_IMAGE_ADD is an exception as it is treated differently
+# ---------------------------------------------------------------------------------------
+# ...see following line from "man sed"
+#    The replacement may contain the special character & to refer to that
+#       portion of the pattern space which matched
+#    for this reason:
+# !!!! Take care to mask '&' as this is an "sed" inernal setting
+# ---------------------------------------------------------------------------------------
+PROJ_CUSTOMER:mcc
+PROJ_VERTICAL:conix
+PROJ_SERVICE:$(basename ${PWD})
+PROJ_VERSION:1.0.1
+PROJ_WATCHER:wolfgang.vonnemann@gmail.com
+# ---------------------------------------------------------------------------------------
+#...settings used on locale testing
+# PROJ_HTTP_PORT:8080
+# PROJ_TEST_DEBUG:true
+# ---------------------------------------------------------------------------------------
+# ...platform based key-names
+# DRP_CF_VERTICAL:conix
+# DRP_CF_SERVICE:customer_inbound
+# DRP_CF_VERSION:1.0.0
+# ---------------------------------------------------------------------------------------
+ELK_VERSION:7.3.0
+# ---------------------------------------------------------------------------------------
+#...publised port from our portainer running on build-stack
+PORTAINER_PORT_LOC:9000
+PORTAINER_PORT_PUB:10001
+# ---------------------------------------------------------------------------------------
+VERSION_MQ:9.1.3.0
+VERSION_GO:1.12.9
+VERSION_ALPINE:alpine3.10
+#ONIXMQM_MQMGR:MQM_CONIX
+CONIXMQM_MQMGR:QM1
+CONIXMQM_APPWD:app
+CONIXMQM_ADPWD:admin
+# ---------------------------------------------------------------------------------------
+#...publised port from our MQ-Manager 
+MQ_STD_PORT_PUB:1414
+MQ_STD_PORT_LOC:1414
+MQ_SSL_PORT_PUB:9443
+MQ_SSL_PORT_LOC:9443
+# ---------------------------------------------------------------------------------------
+#... Q_queueManagerName:"MQM_CONIX"
+#... Q_hostname:"mqs"
+#... Q_listenerPort:"1414"
+#... Q_applicationChannelName:"CLOUD.APP.SVRCONN"
+#... Q_mqUsername:"mqUsername"
+#... Q_apiKey:"apiKey"
+# ---
+# ...established connection via MQ-Explorer
+# Defaults
+#     queue manager is "QM1"
+#     queue         is "DEV.QUEUE.1"
+#     topic         is based on "DEV.BASE.TOPIC" (topic string is under dev/... tree)
+# ---
+# Q_QID="DEV.QUEUE"
+# Q_CHANNEL_APP="DEV.APP.SVRCONN"
+# Q_SERVER_APP="${MQ_CHANNEL_APP}/TCP/${MQ_HOST}"
+# Q_CHANNEL_ADMIN="DEV.ADMIN.SVRCONN"
+# Q_SERVER_ADMIN="${MQ_CHANNEL_ADMIN}/TCP/${MQ_HOST}"
+# ---------------------------------------------------------------------------------------
+# ... dont forget the final new-line 
+# ... even if we define nothing, this file is needed to get this stack to uiStack.sh

@@ -1,0 +1,10 @@
+{
+    "managerName": "QM1",
+    "hostName": "mqs",
+    "portNumber": 1414,
+    "channelName": "DEV.APP.SVRCONN",
+    "mqUser":"conix",
+    "mqPass":"xinoc",
+    "queueName":"CONIX.CONSUME.QUEUE"
+}
+  

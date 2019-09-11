@@ -1,0 +1,22 @@
+#!/bin/bash
+declare _Env="./env.sh"
+
+if [ -e ${_Env} ]; then
+    printf "\n___ Found and use env from current folder\n"
+    . ${_Env}
+else
+    printf "\n+++ Missing ${_Env} on current folder"
+    printf "\n+++ Please create a ${_Env} on current folder in advance\n"
+    exit 42
+fi
+printf "\n... Working in ${PWD} with given args [${*}]"
+printf "\n... Processing docker-compose [docker-compose ${*}]\n\n"
+
+
+docker rm $(docker ps -aqf status=exited -f status=created)
+docker images -qf dangling=true | xargs docker rmi
+#...docker volume list -qf dangling=true | xargs docker volume rm
+
+docker-compose ${dcID} ${*}
+
+docker images |grep ${PROJ_VERTICAL}

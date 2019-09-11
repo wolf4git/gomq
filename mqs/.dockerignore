@@ -1,0 +1,13 @@
+# ignore .git and .cache folders
+.gitignore
+.git
+.cache
+# ignore all *.go files in all folders, including build root
+**/*.go
+# ignore all log-files
+**/*.log
+# ignore special files from git
+./Dockerfile
+./.dockerignore
+./origin.Dockerfile
+ 
